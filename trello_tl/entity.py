@@ -14,10 +14,10 @@ class CardSummary:
         self.card_id = card_id
 
     def __str__(self):
-        return "Card: {} ({})".format(self.card_name, self.card_id)
+        return "Card: {} ".format(self.card_name, self.card_id)
 
     def __repr__(self):
-        return "Card: {} ({})".format(self.card_name, self.card_id)
+        return "Card: {} ".format(self.card_name, self.card_id)
 
 
 class List:

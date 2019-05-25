@@ -4,6 +4,13 @@ class Dao:
     def __init__(self, api):
         self.api = api
 
+    def list_boards(self):
+        try:
+            board_summaries = self.api.list_boards()
+            return board_summaries
+        except Exception as e:
+            raise Exception(e, "Error Fetching Board Information From Trello XD")
+
     def get_board(self, board_id):
         # get lists in board
         try:
