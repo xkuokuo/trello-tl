@@ -22,14 +22,14 @@ class Display:
                 max_len = len(l.card_summaries)
 
         for i,l in enumerate(board.lists):
-            print(align_str_len("  {}. {}  ".format(str(i).rjust(2), l.list_name).ljust(WIDTH), WIDTH), end = "")
+            print(align_str_len("  {}. {}  ".format(str(i).rjust(2), l.list_name), WIDTH), end = "")
 
         print()
 
         for i in range(max_len):
             for j,l in enumerate(board.lists):
                 if i < len(l.card_summaries):
-                    print(align_str_len(" ({}). {} ".format(str(i), l.card_summaries[i].card_name).ljust(WIDTH), WIDTH), end = "")
+                    print(align_str_len(" ({}). {} ".format(str(i), l.card_summaries[i].card_name), WIDTH), end = "")
                 else:
                     print("".ljust(WIDTH), end = "")
             print()

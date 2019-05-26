@@ -39,7 +39,7 @@ def get_print_length(s):
     print_length = 0
     for c in s:
         if is_chinese_char(c):
-            print_length += 3
+            print_length += 2
         else:
             print_length += 1
     return print_length

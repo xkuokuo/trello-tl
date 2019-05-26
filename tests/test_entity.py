@@ -5,6 +5,6 @@ import unittest
 class TestEntities(unittest.TestCase):
 
     def test_card_creation(self):
-        card = Card("hihihi")
+        card = Card("hihihi",  "dummy_content")
         print(card.content)
         assert True
