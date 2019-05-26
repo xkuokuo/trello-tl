@@ -1,4 +1,4 @@
-from trello_tl.util import align_str_len
+from trello_tl.util import align_str_len, is_chinese_char, get_print_length
 
 import unittest
 
@@ -39,17 +39,17 @@ class TestUtil(unittest.TestCase):
         res = align_str_len(s, 15)
         self.assertEqual(res, "这是一段发自内…")
 
-    def test_align_str_len_only_mix_char_same_len(self):
+    def test_align_str_len_mix_char_same_len(self):
         s = "我说yes你说no"
         res = align_str_len(s, 13)
         self.assertEqual(res, s)
 
-    def test_align_str_len_only_mix_char_shorter_len(self):
+    def test_align_str_len_mix_char_shorter_len(self):
         s = "我说yes你说no"
         res = align_str_len(s, 14)
         self.assertEqual(res, s + " ")
 
-    def test_align_str_len_only_mix_char_greater_len(self):
+    def test_align_str_len_mix_char_greater_len(self):
         s = "我说yes你说no"
         res = align_str_len(s, 12)
-        self.assertEqual(res, s + "我说yes你说n…")
+        self.assertEqual(res, "我说yes你说…")

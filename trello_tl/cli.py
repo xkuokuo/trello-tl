@@ -15,12 +15,12 @@ def main():
     config.read(os.path.join(Path.home(), ".trello_tl_config.ini"))
     api = ApiAdapter(CredentialProvider(config['Credential']))
     dao = Dao(api)
-    display = Display()
-    executor = Executor(dao, display, config['Default'])
+    display = Display(config['Display'])
+    executor = Executor(dao, display, config['Board'])
 
     parser = argparse.ArgumentParser(description='trello-tl')
     parser.add_argument('operation', type=str, help="""Trello operations.
-                        Valid values are: lb, db""")
+                        Valid values are: lb, db, ac""")
     if len(sys.argv) < 2:
         parser.print_help()
         exit(1)
@@ -30,13 +30,19 @@ def main():
         pass
     elif operation == "db":
         parser.add_argument('board_identifier', type=str, nargs="?", default="", help="""
-                            Board identifier. It could be the board sequence number returned by 'tl lb', the board name, or the board id.
+                            Board identifier. It could be the board sequence number returned by 'tl lb', or the (partial) the board name
                             Fuzzy search supported (yeah very fuzzy XD).""")
-    elif operation == "al":
+    elif operation == "ac":
+        parser.add_argument('list_identifier', type=str, default="", help="""
+                            List identifier. It could be the list sequence number returned by 'tl lb', or the (partial) list name
+                            Fuzzy search supported (yeah very fuzzy XD).""")
+        parser.add_argument('card_name', type=str, help="Name of the new trello card")
+        parser.add_argument('card_desc', type=str, nargs="?", default="", help="Some extra card description")
         pass
     else:
         parser.print_help()
+        exit(1)
 
     args = parser.parse_args()
     executor.run(args)
-
+    exit(0)

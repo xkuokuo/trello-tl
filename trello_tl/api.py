@@ -56,3 +56,18 @@ class ApiAdapter:
         for e in cards_json:
             cards.append(CardSummary(e['name'], e['id']))
         return cards
+
+    def add_card(self, list_id, card_name, desc=""):
+        res = requests.post("{}1/cards?idList={}&name={}&desc={}&keepFromSource=all&key={}&token={}".format(
+            API_URL,
+            list_id,
+            card_name,
+            desc,
+            self.access_key,
+            self.token))
+        if res.status_code == requests.codes.ok:
+            return True
+        else:
+            print("Error status code: {}".format(res.status_code))
+            print(res.content)
+            return False;

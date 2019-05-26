@@ -1,40 +1,42 @@
 import os
-from .entity import Board
 from .util import align_str_len
 
-WIDTH = 20
+DEFAULT_MAX_WIDTH = 20
 
 class Display:
-    def __init__(self):
-        pass
+    def __init__(self, config={}):
+        if "max_width" in config:
+            self.max_width = int(config["max_width"])
+        else:
+            self.max_width = DEFAULT_MAX_WIDTH
 
     def display_board_list(self, board_list):
         os.system("clear")
         for index, board_summary in enumerate(board_list):
-            print("{}. {}".format(index, board_summary))
+            self.print_style("{}. {}".format(index, board_summary))
 
     def display_board(self, board):
         os.system("clear")
-        print("Board: {}".format(board.board_name, board.board_id))
+        self.print_style("Board: {}".format(board.board_name, board.board_id),
+                         fg_color=40, bg_color=33)
         max_len = 0
         for l in board.lists:
             if max_len < len(l.card_summaries):
                 max_len = len(l.card_summaries)
 
         for i,l in enumerate(board.lists):
-            print(align_str_len("  {}. {}  ".format(str(i).rjust(2), l.list_name), WIDTH), end = "")
-
+            self.print_style(align_str_len("  {}. {}  ".format(str(i).rjust(2), l.list_name), self.max_width),
+                             fg_color=30, bg_color=43, end="")
         print()
 
         for i in range(max_len):
             for j,l in enumerate(board.lists):
                 if i < len(l.card_summaries):
-                    print(align_str_len(" ({}). {} ".format(str(i), l.card_summaries[i].card_name), WIDTH), end = "")
+                    self.print_style(align_str_len(" ({}). {} ".format(str(i), l.card_summaries[i].card_name), self.max_width), end="")
                 else:
-                    print("".ljust(WIDTH), end = "")
+                    self.print_style("".ljust(self.max_width), end="")
             print()
 
-
-
-    def _print_limit_length(self, s, length):
-        print("{}".format(s[:length]))
+    def print_style(self, s, fg_color="", bg_color="", text_style="", end="\n"):
+        sc = "\033[{};{};{}m".format(text_style, fg_color, bg_color)
+        print(sc + s, end=end)
