@@ -1,3 +1,4 @@
+import os
 from .entity import Board
 from .util import align_str_len
 
@@ -8,10 +9,12 @@ class Display:
         pass
 
     def display_board_list(self, board_list):
+        os.system("clear")
         for index, board_summary in enumerate(board_list):
             print("{}. {}".format(index, board_summary))
 
     def display_board(self, board):
+        os.system("clear")
         print("Board: {}".format(board.board_name, board.board_id))
         max_len = 0
         for l in board.lists:
