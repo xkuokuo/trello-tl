@@ -1,4 +1,5 @@
 from .util import isPositiveInt
+
 class Executor:
     def __init__(self, dao, display, config):
         self.dao = dao
@@ -12,7 +13,6 @@ class Executor:
             self._display_board(args.board_identifier)
         else:
             raise Exception("Unsupported Opeartion{}".format(args.operation))
-
 
     def _list_boards(self):
         self.display.display_board_list(self.dao.list_boards())

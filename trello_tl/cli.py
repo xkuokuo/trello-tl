@@ -21,6 +21,10 @@ def main():
     parser = argparse.ArgumentParser(description='trello-tl')
     parser.add_argument('operation', type=str, help="""Trello operations.
                         Valid values are: lb, db""")
+    if len(sys.argv) < 2:
+        parser.print_help()
+        exit(1)
+
     operation = sys.argv[1]
     if operation == "lb":
         pass
