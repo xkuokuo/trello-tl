@@ -6,5 +6,5 @@ class TestEntities(unittest.TestCase):
 
     def test_card_creation(self):
         card = Card("hihihi",  "dummy_content")
-        print(card.content)
+        print(card.desc)
         assert True
