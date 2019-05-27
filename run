@@ -1,0 +1,7 @@
+#! /usr/bin/env python
+
+from trello_tl import cli
+
+if __name__ == "__main__":
+    # just a helper entry point making my lifer easier
+    cli.main()

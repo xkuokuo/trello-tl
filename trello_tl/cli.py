@@ -6,7 +6,7 @@ from pathlib import Path
 
 from .api import ApiAdapter
 from .credential import CredentialProvider
-from .dao import Dao
+from .dao import CachedDao
 from .display import Display
 from .executor import Executor
 
@@ -14,7 +14,8 @@ def main():
     config = configparser.ConfigParser()
     config.read(os.path.join(Path.home(), ".trello_tl_config.ini"))
     api = ApiAdapter(CredentialProvider(config['Credential']))
-    dao = Dao(api)
+    cache_file_path = os.path.join(Path.home(), ".trello_tl_cache.json")
+    dao = CachedDao(api, cache_file_path)
     display = Display(config['Display'])
     executor = Executor(dao, display, config['Board'])
 

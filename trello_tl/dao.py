@@ -19,7 +19,6 @@ class Dao:
         except Exception as e:
             raise Exception(e, "Error Fetching lists Information For Board ID: {}".format(board_id))
 
-
     def get_board(self, board_id):
         # get lists in board
         try:
@@ -49,3 +48,17 @@ class Dao:
                 raise Exception("Unexpected status code.")
         except Exception as e:
             raise Exception(e, "Error Adding Card To List")
+
+class CachedDao(Dao):
+    def __init__(self, api, cache_file_path):
+        super().__init__(api)
+
+    def get_board(self, board_id):
+        return super().get_board(board_id)
+
+    def _load_from_cache():
+        pass
+
+    def _dump_to_cache():
+        pass
+
