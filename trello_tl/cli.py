@@ -31,15 +31,17 @@ def main():
         pass
     elif operation == "db":
         parser.add_argument('board_identifier', type=str, nargs="?", default="", help="""
-                            Board identifier. It could be the board sequence number returned by 'tl lb', or the (partial) the board name
-                            Fuzzy search supported (yeah very fuzzy XD).""")
+                            Board identifier. It could be the board sequence number returned by 'tl lb', or the (partial) the board name.""")
     elif operation == "ac":
         parser.add_argument('list_identifier', type=str, default="", help="""
-                            List identifier. It could be the list sequence number returned by 'tl lb', or the (partial) list name
-                            Fuzzy search supported (yeah very fuzzy XD).""")
+                            List identifier. It could be the list sequence number returned by 'tl db', or the (partial) list name.""")
         parser.add_argument('card_name', type=str, help="Name of the new trello card")
         parser.add_argument('card_desc', type=str, nargs="?", default="", help="Some extra card description")
-        pass
+    elif operation == "dc":
+        parser.add_argument('list_identifier', type=str, default="", help="""
+                            List identifier. It could be the list sequence number returned by 'tl db', or the (partial) list name.""")
+        parser.add_argument('card_identifier', type=str, default="", help="""
+                            Card identifier. It could be the card sequence number returned by 'tl db', or the (partial) card name.""")
     else:
         parser.print_help()
         exit(1)

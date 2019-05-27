@@ -17,7 +17,21 @@ class Dao:
             list_summaries = self.api.list_lists(board_id)
             return list_summaries
         except Exception as e:
-            raise Exception(e, "Error Fetching lists Information For Board ID: {}".format(board_id))
+            raise Exception(e, "Error Fetching Lists Information For Board ID: {}".format(board_id))
+
+    def list_cards(self, list_id):
+        try:
+            card_summaries = self.api.list_cards(list_id)
+            return card_summaries
+        except Exception as e:
+            raise Exception(e, "Error Fetching Cards Information For List ID: {}".format(list_id))
+
+    def get_card(self, card_id):
+        try:
+            card = self.api.get_card(card_id)
+            return card
+        except Exception as e:
+            raise Exception(e, "Error Fetching Card From Card ID: {}".format(card_id))
 
     def get_board(self, board_id):
         # get lists in board

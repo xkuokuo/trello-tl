@@ -3,9 +3,9 @@ class Card:
 
     Reference: https://developers.trello.com/reference#cards-1
     """
-    def __init__(self, name, content):
-        self.name = name
-        self.content = content
+    def __init__(self, card_name, desc):
+        self.card_name = card_name
+        self.desc = desc
 
 
 class CardSummary:

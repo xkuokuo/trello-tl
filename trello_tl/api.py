@@ -1,7 +1,7 @@
 import json
 import requests
 
-from .entity import BoardSummary, ListSummary, CardSummary
+from .entity import BoardSummary, ListSummary, CardSummary, Card
 
 API_URL="https://api.trello.com/"
 
@@ -71,3 +71,15 @@ class ApiAdapter:
             print("Error status code: {}".format(res.status_code))
             print(res.content)
             return False;
+
+    def get_card(self, card_id):
+        res = requests.get("{}/1/cards/{}?key={}&token={}".format(
+            API_URL,
+            card_id,
+            self.access_key,
+            self.token))
+        if res.status_code == requests.codes.ok:
+            card_json = json.loads(res.content)
+            return Card(card_json['name'], card_json['desc'])
+        else:
+            raise Exception("Unexpected status code {} when getting card {}".format(res.status_code, card_id))

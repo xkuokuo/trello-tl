@@ -10,6 +10,12 @@ class Display:
         else:
             self.max_width = DEFAULT_MAX_WIDTH
 
+    def display_card(self, card):
+        self.print_style("Title:", fg_color=30, bg_color=43, end="\n")
+        self.print_style(card.card_name)
+        self.print_style("Description:", fg_color=30, bg_color=43, end="\n")
+        self.print_style(card.desc)
+
     def display_board_list(self, board_list):
         os.system("clear")
         for index, board_summary in enumerate(board_list):
